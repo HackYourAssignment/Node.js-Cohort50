@@ -1,7 +1,8 @@
 export const sendResponse = (res, status, data = null, message = null) => {
+    const statusMessage = status < 400 ? 'success' : 'error';
     res.status(status).json({
-      status: status < 400 ? 'success' : 'error',
-      message: message || (status < 400 ? 'Success' : 'Error'),
+      status: statusMessage,
+      message: message || statusMessage,
       data,
     });
 };
