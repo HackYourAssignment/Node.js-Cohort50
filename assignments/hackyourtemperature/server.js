@@ -12,7 +12,7 @@ app.get('/', (req, res) => {
     sendResponse(res, httpStatus.OK, null, 'hello from backend to frontend!');
 });
 
-app.post('/weather', (req, res) => {
+app.post('/weather', (req, res, next) => {
     const cityName = req.body.cityName;
     
     if (!cityName) {
