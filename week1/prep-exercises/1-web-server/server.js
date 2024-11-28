@@ -3,12 +3,29 @@
  */
 
 const http = require('http');
+const fs = require('fs').promises;
 
-//create a server
-let server = http.createServer(function (req, res) {
-  // YOUR CODE GOES IN HERE
-	res.write('Hello World!'); // Sends a response back to the client
-	res.end(); // Ends the response
+let server = http.createServer(async (req, res) => {
+	try {
+		if (req.url === '/') {
+		  const html = await fs.readFile('index.html', 'utf8');
+		  res.setHeader('Content-Type', 'text/html');
+		  res.write(html);
+		} else if (req.url === '/index.js') {
+		  const js = await fs.readFile('index.js', 'utf8');
+		  res.setHeader('Content-Type', 'application/javascript');
+		  res.write(js);
+		} else {
+		  res.statusCode = 404;
+		  res.write('File not found');
+		}
+	} catch (err) {
+		res.statusCode = 500;
+		res.write('Internal Server Error');
+	}
+	res.end();
 });
 
-server.listen(3000); // The server starts to listen on port 3000
+server.listen(3000, () => {
+	console.log('Server running at http://localhost:3000');
+});
