@@ -17,7 +17,7 @@ app.post('/weather', async (req, res) => {
         if (!cityName ) {
             return res
                 .status(400)
-                .json({ weatherText: 'city name is required!' });
+                .json({ weatherText: 'City name is required!' });
         }
 
         const response = await fetch(
@@ -25,7 +25,7 @@ app.post('/weather', async (req, res) => {
         );
 
         if (!response.ok) {
-            return res.status(404).json({ weatherText: 'city  is not found!' });
+            return res.status(404).json({ weatherText: 'City is not found!' });
         }
 
         const jsonData = await response.json();

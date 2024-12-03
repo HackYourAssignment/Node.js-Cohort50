@@ -23,9 +23,9 @@ describe('POST /weather', () => {
     it('should get 200 if correct cityName is sent', async () => {
         const response = await request
             .post('/weather')
-            .send({ cityName: 'Den Haag' });
+            .send({ cityName: 'Amsterdam' });
 
         expect(response.status).toBe(200);
-        expect(response.body.weatherText).toContain('Den Haag');
+        expect(response.body.weatherText).toContain('Amsterdam');
     });
 });
