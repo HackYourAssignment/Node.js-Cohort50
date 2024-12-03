@@ -1,24 +1,21 @@
-import express from "express";
+// Import necessary modules
+import express from 'express';
 
-// Initialize Express app
 const app = express();
 const PORT = 3000;
 
-// Middleware to parse JSON request bodies
+// Middleware to parse JSON data in POST requests
 app.use(express.json());
 
-// GET request for /
-app.get("/", (req, res) => {
-  res.send("hello from backend to frontend!");
+// GET route for '/'
+app.get('/', (req, res) => {
+  res.send('hello from backend to frontend!');
 });
 
-// POST request for /weather
-app.post("/weather", (req, res) => {
-  const { cityName = "Amsterdam" } = req.body; // Extract cityName from request body
-  if (!cityName) {
-    return res.status(400).send("City name is required.");
-  }
-  res.json({ message: `You submitted: ${cityName}` });
+// POST route for '/weather'
+app.post('/weather', (req, res) => {
+  const { cityName } = req.body; // Extract cityName from request body
+  res.send(`You submitted: ${cityName}`);
 });
 
 // Start the server
