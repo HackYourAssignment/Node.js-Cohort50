@@ -8,9 +8,27 @@
  * Hints:
  * - make sure to use the correct headers and http method in the request
  */
+import fetch from 'node-fetch';
 
-function makeReservation() {
+async function makeReservation() {
+  try{
+    const url = "https://reservation100-sandbox.mxapps.io/rest-doc/api";
+    const response = await fetch(url);
+    if(!response.ok){
+      throw new Error("URL: Not found");
+    }
+const data = await response.json();
+if(!data){
+  throw new Error("Data: Not found");
+
+}
+console.log(data);
+  }catch(error){
+    console.log(error);
+
+  }
   // YOUR CODE GOES IN HERE
+
 }
 
 makeReservation();
